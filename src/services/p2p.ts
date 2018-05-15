@@ -8,7 +8,6 @@ import { CallbackType } from '../types/Callback';
 import { BitcoinBlockType, BlockHeader, BlockHeaderObj } from '../types/Block';
 import { BitcoinTransactionType } from '../types/Transaction';
 import { BlockModel } from '../models/block';
-import { SupportedChain } from '../types/SupportedChain';
 import { TransactionModel } from '../models/transaction';
 import { LoggifyClass } from '../decorators/Loggify';
 const cluster = require('cluster');
@@ -17,9 +16,9 @@ const async = require('async');
 
 @LoggifyClass
 export class P2pService extends EventEmitter {
-  chain: SupportedChain;
+  chain: string;
   network: string;
-  parentChain: SupportedChain;
+  parentChain: string;
   forkHeight: number;
   bitcoreLib: any;
   bitcoreP2p: any;

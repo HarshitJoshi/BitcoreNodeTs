@@ -11,6 +11,9 @@ const services: CSP.ChainStateServices = {
 
 class ChainStateProxy implements CSP.ChainStateProvider {
   get({ chain }: Chain) {
+    if(services[chain] == undefined) {
+      throw new Error(`Chain ${chain} doesn't have a ChainStateProvider registered`);
+    }
     return services[chain];
   }
 

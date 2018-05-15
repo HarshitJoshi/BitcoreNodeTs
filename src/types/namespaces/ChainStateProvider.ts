@@ -1,6 +1,5 @@
 import { IBlock } from "../../models/block";
 import { Response } from "express";
-import { SupportedChain } from "../../types/SupportedChain";
 import { IWalletModel, IWallet, IWalletDoc } from "../../models/wallet";
 import { ChainNetwork } from "../../types/ChainNetwork";
 export declare namespace CSP {
@@ -76,7 +75,7 @@ export declare namespace CSP {
     stream: Response;
   };
 
-  export type Provider<T> = { get(params: { chain: SupportedChain }): T };
+  export type Provider<T> = { get(params: { chain: string }): T };
   export type ChainStateProvider = Provider<IChainStateService> &
     IChainStateService;
   export interface IChainStateService {
