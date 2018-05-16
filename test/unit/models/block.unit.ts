@@ -23,20 +23,15 @@ describe('Block Model', () => {
         afterEach( () => {
             sandbox.restore();
         });
-        it('should return with height zero if there are no blocks', function(done){
+        it('should return with height zero if there are no blocks', async () => {
             sandbox.stub(BlockModel, 'findOne'). returns({
                 sort: sandbox.stub().returnsThis(),
                 exec: sandbox.stub().returns(null, null)
             });
             const params = { chain: 'BTC', network: 'regtest' };
-            BlockModel.getLocalTip(params)
-                .then(function(result){
-                    result.should.deep.equal({height: 0});
-                    done();
-                })
-                .catch(function(err){
-                    done(err);
-                });
+            const result = await BlockModel.getLocalTip(params);
+            result.should.deep.equal({height: 0});
+            });
         });
     });
 

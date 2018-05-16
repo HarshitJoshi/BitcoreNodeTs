@@ -186,9 +186,9 @@ BlockSchema.statics.getLocalTip = function(params: ChainNetwork) {
         .sort({ height: -1 })
         .exec();
       let foundBlock = bestBlock || { height: 0 };
-      resolve(foundBlock);
+      return resolve(foundBlock);
     } catch (e) {
-      reject(e);
+      return reject(e);
     }
   });
 };

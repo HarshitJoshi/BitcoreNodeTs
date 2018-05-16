@@ -4,7 +4,7 @@
 const async = require('async');
 const glob = require('glob');
 const path = require('path');
-const Mocha = require('mocha');
+import Mocha = require('mocha');
 
 const Storage = require('../src/services/storage');
 
@@ -15,14 +15,14 @@ const storageArgs = {
     dbName: 'bitcore-unit'
 };
 
-function handleError(err){
+function handleError(err: any){
     console.error(err);
     console.log(err.stack);
     process.exit(1);
 }
 
-function startTestDatabase(next){
-    const onStart = function(err){
+function startTestDatabase(next: any){
+    const onStart = function(err: any){
         if(err){
             handleError(err);
         }
@@ -31,20 +31,20 @@ function startTestDatabase(next){
     Storage.start(onStart, storageArgs);
 }
 
-function runTests(next){
+function runTests(next: any){
     
-    const integrationTestRunner = new Mocha();
-    integrationTestRunner.timeout = TIMEOUT;
-    integrationTestRunner.reporter('spec');
+    const unitTestRunner = new Mocha();
+    unitTestRunner.timeout(TIMEOUT);
+    unitTestRunner.reporter('spec');
     
     const testDir = path.join(__dirname, '../../test/unit');
     const files = glob.sync(`${testDir}/**/**.js`);
-    files.forEach(function(file){
-        integrationTestRunner.addFile(file);
+    files.forEach(function(file: any){
+        unitTestRunner.addFile(file);
     });
 
     try{
-        integrationTestRunner.run(function(failures){
+        unitTestRunner.run(function(failures){
             process.exit(failures);
         });
     } catch(err){
