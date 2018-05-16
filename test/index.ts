@@ -21,11 +21,15 @@ describe('Chain State Provider', () => {
       ChainStateProvider.get({ chain: 'NOTAREALCOIN' });
     }).to.throw();
   });
-
   it('Should be able to register a new provider', () => {
     expect(() => {
       let newInternalProvider = new InternalStateProvider('NEWCOIN');
       ChainStateProvider.registerService('NEWCOIN', newInternalProvider);
+    }).to.not.throw();
+  });
+  it('Should have a new state provider for NEWCOIN', () => {
+    expect(() => {
+      ChainStateProvider.get({ chain: 'NEWCOIN'});
     }).to.not.throw();
   });
 });
