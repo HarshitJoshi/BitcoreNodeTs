@@ -3,6 +3,7 @@ import { TransformOptions } from "../types/TransformOptions";
 import { WalletAddressModel } from "../models/walletAddress";
 import { ChainNetwork } from "../types/ChainNetwork";
 import { LoggifyObject } from "../decorators/Loggify";
+import { TransformableModel } from "../types/TransformableModel";
 
 export interface IWallet extends ChainNetwork {
   name: string;
@@ -14,7 +15,7 @@ export type WalletQuery = { [key in keyof IWallet]?: any } &
   DocumentQuery<IWallet, Document>;
 
 export type IWalletDoc = IWallet & Document;
-export type IWalletModelDoc = IWallet & Model<IWalletDoc>;
+export type IWalletModelDoc = IWallet & TransformableModel<IWalletDoc>;
 export interface IWalletModel extends IWalletModelDoc {
   _id: Schema.Types.ObjectId
   updateCoins: (wallet: IWalletModelDoc) => any;

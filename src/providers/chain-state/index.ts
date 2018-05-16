@@ -1,12 +1,14 @@
 import { BTCStateProvider } from './btc/btc';
 import { BCHStateProvider } from './bch/bch';
+import { ETHStateProvider } from './eth/eth';
 import { CSP } from '../../types/namespaces/ChainStateProvider';
 import { Chain } from '../../types/ChainNetwork';
 import logger from '../../logger';
 
 const services: CSP.ChainStateServices = {
   BTC: new BTCStateProvider(),
-  BCH: new BCHStateProvider()
+  BCH: new BCHStateProvider(),
+  ETH: new ETHStateProvider()
 };
 
 class ChainStateProxy implements CSP.ChainStateProvider {
