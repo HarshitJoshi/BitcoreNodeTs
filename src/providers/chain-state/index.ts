@@ -1,6 +1,7 @@
 import { BTCStateProvider } from './btc/btc';
 import { BCHStateProvider } from './bch/bch';
 import { ETHStateProvider } from './eth/eth';
+import { BATStateProvider } from "./erc20/tokens/bat";
 import { CSP } from '../../types/namespaces/ChainStateProvider';
 import { Chain } from '../../types/ChainNetwork';
 import logger from '../../logger';
@@ -8,7 +9,8 @@ import logger from '../../logger';
 const services: CSP.ChainStateServices = {
   BTC: new BTCStateProvider(),
   BCH: new BCHStateProvider(),
-  ETH: new ETHStateProvider()
+  ETH: new ETHStateProvider(),
+  BAT: new BATStateProvider()
 };
 
 class ChainStateProxy implements CSP.ChainStateProvider {

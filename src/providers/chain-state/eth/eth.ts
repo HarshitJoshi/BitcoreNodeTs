@@ -10,7 +10,7 @@ import { Schema } from 'mongoose';
 const Web3 = require('web3-eth');
 
 export class ETHStateProvider extends InternalStateProvider
-implements CSP.IChainStateService {
+  implements CSP.IChainStateService {
   config: any;
 
   constructor(public chain: string = 'ETH') {
@@ -62,14 +62,13 @@ implements CSP.IChainStateService {
     const { network } = params;
     let addresses = await this.getWalletAddresses(network, params.wallet._id);
     let addressBalancePromises = addresses.map(({ address }) =>
-      this.getRPC(network).getBalance(address)
+      this.getBalanceForAddress({ chain: this.chain, network, address })
     );
     let addressBalances = await Promise.all(addressBalancePromises);
     let balance = addressBalances.reduce(
-      (prev, cur) => Number(prev) + Number(cur),
+      (prev, cur) => Number(prev) + Number(cur[0].balance),
       0
     );
     return [{ balance }];
   }
-
 }
