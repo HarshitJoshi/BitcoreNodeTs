@@ -200,7 +200,7 @@ TransactionSchema.statics.getMintOps = async function(
 ): Promise<any> {
   return new Promise(async (resolve, reject) => {
     let { chain, height, network, txs, parentChain, forkHeight } = params;
-    let mintOps = [];
+    let mintOps = [] as Array<any>;
     let parentChainCoins = [];
     if (parentChain && forkHeight && height < forkHeight) {
       parentChainCoins = await CoinModel.find({

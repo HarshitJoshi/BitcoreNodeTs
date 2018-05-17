@@ -16,7 +16,7 @@ async.series(
     Storage.start.bind(Storage),
     Worker.start.bind(Worker),
     async (cb: CallbackType) => {
-      let p2pServices = [];
+      let p2pServices = [] as Array<P2pService>;
       for (let chain of Object.keys(config.chains)) {
         for (let network of Object.keys(config.chains[chain])) {
           const chainConfig = config.chains[chain][network];
