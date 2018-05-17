@@ -26,7 +26,7 @@ router.get('/', function(req, res) {
   ChainStateProvider.streamTransactions(payload);
 });
 
-router.get('/:txid', function(req, res) {
+router.get('/:txId', function(req, res) {
   let { chain, network, txId } = req.params;
   if (typeof txId !== 'string' || !chain || !network) {
     return res.status(400).send('Missing required param');
