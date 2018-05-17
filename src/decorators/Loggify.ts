@@ -1,4 +1,5 @@
 import logger from '../logger';
+import util from 'util';
 
 let LoggifiedClasses: { [key: string]: boolean } = {};
 export function LoggifyClass<T extends { new (...args: any[]): {} }>(
@@ -38,7 +39,7 @@ export function LoggifyFunction(fn: Function, logPrefix?: string, bind?: any) {
     copy = copy.bind(bind);
   }
   return function(...methodargs: any[]) {
-    logger.debug(`${logPrefix}::args::${JSON.stringify(methodargs)} `);
+    logger.debug(`${logPrefix}::args::${util.inspect(methodargs)}`);
     let returnVal = copy(...methodargs);
     if (returnVal && <Promise<any>>returnVal.then) {
       returnVal
@@ -47,11 +48,11 @@ export function LoggifyFunction(fn: Function, logPrefix?: string, bind?: any) {
           throw err;
         })
         .then((data: any) => {
-          logger.debug(`${logPrefix}::resolved::${JSON.stringify(data)}`);
+          logger.debug(`${logPrefix}::resolved::${util.inspect(data)}`);
           return data;
         });
     } else {
-      logger.debug(`${logPrefix}::returned::${JSON.stringify(returnVal)}`);
+      logger.debug(`${logPrefix}::returned::${util.inspect(returnVal)}`);
     }
     return returnVal;
   };
