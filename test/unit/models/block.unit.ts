@@ -31,7 +31,6 @@ describe('Block Model', () => {
             const params = { chain: 'BTC', network: 'regtest' };
             const result = await BlockModel.getLocalTip(params);
             result.should.deep.equal({height: 0});
-            });
         });
     });
 
